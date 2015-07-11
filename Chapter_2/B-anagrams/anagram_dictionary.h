@@ -1,49 +1,37 @@
-#include<iostream>
-#include<algorithm>
-#include<list>
-#include<map>
+#include <algorithm>
+#include <list>
+#include <map>
+
+typedef std::string word_storage;
+typedef std::list<word_storage> word_collection;
+typedef std::map<word_storage, word_collection> raw_anagram_dictionary;
 
 class anagram_dictionary
+	: protected raw_anagram_dictionary
 {
 public:
-    inline void add(const std::string &str)
-    {
-	m_dictionary[make_signature(str)].push_back(str);
-    }
-
-    inline void print(void) const
-    {
-	if (m_dictionary.empty())
-	{
-	    std::cout << "the dictionary is empty" << std::endl;
+	void add(const word_storage &word) {
+		raw_anagram_dictionary::operator[](make_signature(word)).push_back(word);
 	}
 	
-	for (const auto &item : m_dictionary)
-	{
-	    const auto &signature = item.first;
-	    const auto &anagrams = item.second;
-	    std::cout << "anagrams of " << *anagrams.begin() << '(' << signature<< ')' << " are:\n";
-	    
-	    for (const auto &a : anagrams)
-		std::cout << a << "\n";
-	    
-	    std::cout << std::endl;
+	const_iterator begin() const {
+		return raw_anagram_dictionary::begin();
 	}
-    }
+	
+	const_iterator end() const {
+		return raw_anagram_dictionary::end();
+	}
 
 protected:
-    std::string make_signature(const std::string &str)
-    {
-	auto signature = str;
+	word_storage make_signature(const word_storage &word) const
+	{
+		auto signature = word;
 
-	for (auto &c : signature)
-	    c = tolower(c);
+		for (auto &c : signature)
+			c = tolower(c);
 
-	std::sort(signature.begin(), signature.end());
+		std::sort(signature.begin(), signature.end());
 
-	return std::move(signature);
-    }
-
-protected:
-    std::map<std::string, std::list<std::string>> m_dictionary;
+		return std::move(signature);
+	}
 };
