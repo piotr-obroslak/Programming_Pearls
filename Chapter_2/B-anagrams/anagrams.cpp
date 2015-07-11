@@ -2,12 +2,12 @@
 
 int main(int argc, char*argv[])
 {
-    anagram_dictionary dict;
+	anagram_dictionary dict;
 
-    for (int i=1; i<argc; i++)
-	dict.add(argv[i]);
+	for (int i=1; i<argc; i++)
+		dict.add(argv[i]);
 
-    dict.print();
+	dict.print();
 
-    return 0;
+	return 0;
 }
