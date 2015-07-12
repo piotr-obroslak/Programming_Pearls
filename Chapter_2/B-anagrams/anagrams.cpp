@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 #include "anagram_dictionary.h"
 
 static void print_anagrams(const anagram_dictionary &dict)

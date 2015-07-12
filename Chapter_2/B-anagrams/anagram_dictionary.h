@@ -1,3 +1,6 @@
+#ifndef _ANAGRAM_DICTIONARY_H_
+#define _ANAGRAM_DICTIONARY_H_
+
 #include <algorithm>
 #include <list>
 #include <map>
@@ -35,3 +38,5 @@ protected:
 		return std::move(signature);
 	}
 };
+
+#endif
